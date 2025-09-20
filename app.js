@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/connectDB.js";
 import authRouter from "./routes/authRoutes.js";
+import voteRouter from "./routes/voteRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -24,7 +25,9 @@ app.use(
     credentials: true,
   })
 );
+
 app.use("/api/auth", authRouter);
+app.use("/api/vote", voteRouter);
 connectDB();
 
 const PORT = process.env.PORT || 5000;

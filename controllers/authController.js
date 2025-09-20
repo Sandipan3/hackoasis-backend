@@ -46,10 +46,8 @@ export const login = async (req, res) => {
     publicAddress = publicAddress.toLowerCase();
     const user = await User.findOne({ publicAddress });
     if (!user) return res.status(404).json({ message: "User not found" });
-    //sign message should be same for frontend and backend
     const message = `Sign this nonce: ${user.nonce}`;
     const recovered = ethers.verifyMessage(message, signature);
-    // ethers.verifyMessage(message, signature) -> uses public key to verify the same in backend
 
     if (recovered.toLowerCase() !== publicAddress) {
       return res.status(401).json({ message: "Signature verification failed" });

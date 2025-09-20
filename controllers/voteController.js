@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import dotenv from "dotenv";
 dotenv.config();
 
-// ------------------ Human-readable ABI ------------------
 const contractAbi = [
   "function createElection(string title, string description, uint256 totalCandidates) public returns (uint256)",
   "function registerVoters(uint256 electionId, bytes32[] identityCommitments) public",
@@ -18,8 +17,6 @@ const contract = new ethers.Contract(
   contractAbi,
   signer
 );
-
-// ------------------ Controller functions ------------------
 
 // Admin: create election
 export const createElection = async (req, res) => {

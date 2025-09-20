@@ -6,7 +6,6 @@ import User from "../models/User.js";
 
 dotenv.config();
 
-// Generate or fetch nonce for a wallet
 export const getNonce = async (req, res) => {
   try {
     let { publicAddress } = req.body;
@@ -18,7 +17,6 @@ export const getNonce = async (req, res) => {
 
     let user = await User.findOne({ publicAddress });
     if (!user) {
-      // create new user if not exists
       user = await User.create({
         publicAddress,
         nonce: crypto.randomBytes(32).toString("hex"),
@@ -33,7 +31,6 @@ export const getNonce = async (req, res) => {
   }
 };
 
-// Verify signature and login
 export const login = async (req, res) => {
   try {
     let { publicAddress, signature } = req.body;
@@ -52,8 +49,6 @@ export const login = async (req, res) => {
     if (recovered.toLowerCase() !== publicAddress) {
       return res.status(401).json({ message: "Signature verification failed" });
     }
-
-    // refresh nonce for next login
     user.nonce = crypto.randomBytes(256).toString("hex");
     await user.save();
 

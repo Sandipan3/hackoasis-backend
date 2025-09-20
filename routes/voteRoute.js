@@ -1,21 +1,24 @@
 import express from "express";
-import {} from "../controllers/voteControllers.js";
-import authMiddleware from "../middlewares/authMiddleware.js";
 import {
-  getRole,
   createElection,
   registerVoters,
   castVote,
   getVoteCount,
+  getRole,
+  addAdmin,
+  registerCandidate,
+  getCandidate,
 } from "../controllers/voteController.js";
 
 const voteRouter = express.Router();
 
-// Only admin can create election and register voters
-voteRouter.post("/create", authMiddleware, createElection);
-voteRouter.post("/register", authMiddleware, registerVoters);
-voteRouter.post("/cast", authMiddleware, castVote);
-voteRouter.get("/:electionId/:candidateId", getVoteCount);
-voteRouter.post("/role", authMiddleware, getRole);
+voteRouter.post("/create", createElection);
+voteRouter.post("/register", registerVoters);
+voteRouter.post("/vote", castVote);
+voteRouter.post("/add-admin", addAdmin);
+voteRouter.post("/role", getRole);
+voteRouter.post("/candidate/register", registerCandidate);
+voteRouter.get("/candidate/:electionId/:candidateId", getCandidate);
+voteRouter.get("/count/:electionId/:candidateId", getVoteCount);
 
 export default voteRouter;

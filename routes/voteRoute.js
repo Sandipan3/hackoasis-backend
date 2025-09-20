@@ -7,7 +7,7 @@ import {
 } from "../controllers/voteControllers.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
-const router = express.Router();
+const voteRouter = express.Router();
 
 // Only admin can create election and register voters
 router.post("/create", authMiddleware, createElection);
@@ -19,4 +19,4 @@ router.post("/cast", authMiddleware, castVote);
 // Anyone can query votes
 router.get("/:electionId/:candidateId", getVoteCount);
 
-export default router;
+export default voteRouter;

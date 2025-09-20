@@ -4,7 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/connectDB.js";
 import authRouter from "./routes/authRoutes.js";
-import voteRouter from "./routes/voteRoutes.js";
+import voteRouter from "./routes/voteRoute.js";
+
 dotenv.config();
 
 const app = express();

@@ -102,3 +102,15 @@ export const getVoteCount = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Check if a user is admin
+export const getRole = async (req, res) => {
+  try {
+    const { userAddress } = req.body;
+    const isAdmin = await contract.isAdmin(userAddress);
+    res.json({ isAdmin });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};

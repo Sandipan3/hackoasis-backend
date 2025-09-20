@@ -12,10 +12,10 @@ import {
 const voteRouter = express.Router();
 
 // Only admin can create election and register voters
-router.post("/create", authMiddleware, createElection);
-router.post("/register", authMiddleware, registerVoters);
-router.post("/cast", authMiddleware, castVote);
-router.get("/:electionId/:candidateId", getVoteCount);
-router.post("/role", authMiddleware, getRole);
+voteRouter.post("/create", authMiddleware, createElection);
+voteRouter.post("/register", authMiddleware, registerVoters);
+voteRouter.post("/cast", authMiddleware, castVote);
+voteRouter.get("/:electionId/:candidateId", getVoteCount);
+voteRouter.post("/role", authMiddleware, getRole);
 
 export default voteRouter;
